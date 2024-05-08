@@ -1,4 +1,8 @@
 # Release Notes
+### 6.5.0 - May 8 2024
+* Fix Xrm.Navigation.openFile has inncorect type for openFileOptions (@matejskubic)
+* Do not append 1 to field name in select type (@mkholt)
+
 ### 6.4.0 - January 1 2024
 * Add getContentWindow method in ExternalControl( Webresource and IFrame) (@VlassisBakas)
 * XrmQuery clean usage of substr and == (@skovlund)
