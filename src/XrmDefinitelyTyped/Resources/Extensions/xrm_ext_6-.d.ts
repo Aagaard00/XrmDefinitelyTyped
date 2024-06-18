@@ -64,7 +64,7 @@ declare namespace Xrm {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interface UiModule<T extends TabCollectionBase, U extends ControlCollectionBase> {
+  interface UiModule<T extends TabCollectionBase, C extends ControlCollectionBase, Q extends QuickFormCollectionBase = QuickFormCollectionBase> {
     /**
      * Use this method to remove form level notifications.
      *
