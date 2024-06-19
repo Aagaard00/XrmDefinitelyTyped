@@ -997,7 +997,7 @@ declare namespace Xrm {
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface ExecutionContext<TSource, TArgs> {
-        getFormContext(): Xrm.PageBase<Xrm.AttributeCollectionBase, Xrm.TabCollectionBase, Xrm.ControlCollectionBase>;
+        getFormContext(): Xrm.PageBase<Xrm.AttributeCollectionBase, Xrm.TabCollectionBase, Xrm.ControlCollectionBase, Xrm.QuickViewFormCollectionBase>;
     }
 
     interface SaveOptions {
@@ -1099,7 +1099,7 @@ declare namespace Xrm {
      * Interface for the ui of a form.
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    interface UiModule<T extends TabCollectionBase, U extends ControlCollectionBase> {
+    interface UiModule<T extends TabCollectionBase, C extends ControlCollectionBase, Q extends QuickViewFormCollectionBase = QuickViewFormCollectionBase> {
         /**
          * Adds a function to be called on the form OnLoad event.
          * @param myFunction The function to be executed on the form OnLoad event. The function will be added to the bottom of the event handler pipeline.
@@ -1479,7 +1479,7 @@ declare namespace Xrm {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-interface Xrm<T extends Xrm.PageBase<Xrm.AttributeCollectionBase, Xrm.TabCollectionBase, Xrm.ControlCollectionBase>> extends BaseXrm {
+interface Xrm<T extends Xrm.PageBase<Xrm.AttributeCollectionBase, Xrm.TabCollectionBase, Xrm.ControlCollectionBase, Xrm.QuickViewFormCollectionBase>> extends BaseXrm {
     Device: Xrm.Device;
     Encoding: Xrm.Encoding;
     Navigation: Xrm.Navigation;
