@@ -141,20 +141,20 @@ let nsName xrmForm =
     | Some ty -> sprintf ".%s" ty
     | None   -> "")
 
-let getQuickFormCollection (quickForms: XrmFormQuickForm list) (formMap: Map<System.Guid, XrmForm>) =
+let getQuickViewFormCollection (quickViewForms: XrmFormQuickViewForm list) (formMap: Map<System.Guid, XrmForm>) =
   let getFuncs =
-    quickForms
+    quickViewForms
     |> List.map (fun (name, (_, formId)) ->
         let paramType = getConstantType name
         let returnType = 
           match formMap.TryGetValue formId with
           | (true, form) -> TsType.Custom (sprintf "%s.%s" (nsName form) form.name)
-          | (false, _) -> TsType.Custom "Xrm.QuickFormBase"
+          | (false, _) -> TsType.Custom "Xrm.QuickViewFormBase"
         Function.Create("get", [Variable.Create("name", paramType)], returnType)
     )
 
-  Interface.Create("QuickForms", extends = ["Xrm.QuickFormCollectionBase"],
-    funcs = getFuncs @ defaultCollectionFuncs "Xrm.QuickFormBase")
+  Interface.Create("QuickViewForms", extends = ["Xrm.QuickViewFormCollectionBase"],
+    funcs = getFuncs @ defaultCollectionFuncs "Xrm.QuickViewFormBase")
 
 /// Generate Xrm.Page.ui.tabs.get(<string>) functions.
 let getTabCollection (tabs: XrmFormTab list) =
@@ -257,7 +257,7 @@ let getFormNamespace (form: XrmForm) formMap crmVersion generateMappings =
   let baseInterfaces =
     [ if not(form.formType = Some "Quick") then Some (getAttributeCollection form.attributes) else None
       Some (getControlCollection form.controls form.formType crmVersion)
-      if not(form.formType = Some "Quick") then Some (getQuickFormCollection form.quickForms formMap) else None
+      if not(form.formType = Some "Quick") then Some (getQuickViewFormCollection form.quickViewForms formMap) else None
       Some (getTabCollection form.tabs) ]
     |> List.choose id
   Namespace.Create(form.name,
@@ -275,10 +275,10 @@ let getFormNamespace (form: XrmForm) formMap crmVersion generateMappings =
 let getFormInterface (form: XrmForm) crmVersion =
   let superClass =
     if (form.formType = Some "Quick") then
-      sprintf "Xrm.QuickForm<%s.Tabs,%s.Controls>"
+      sprintf "Xrm.QuickViewForm<%s.Tabs,%s.Controls>"
         form.name form.name
     else
-      sprintf "Xrm.PageBase<%s.Attributes,%s.Tabs,%s.Controls,%s.QuickForms>"
+      sprintf "Xrm.PageBase<%s.Attributes,%s.Tabs,%s.Controls,%s.QuickViewForms>"
         form.name form.name form.name form.name
 
   Interface.Create(form.name, extends = [superClass], 

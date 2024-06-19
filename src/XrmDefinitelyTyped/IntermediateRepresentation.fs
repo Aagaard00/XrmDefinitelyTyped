@@ -99,11 +99,12 @@ type FormType =
   | AppointmentBookBackup = 102
 
 type CanBeNull = bool
-type QuickFormReference = string * System.Guid
+type QuickViewReference = string * System.Guid
+
 type XrmFormAttribute = string * AttributeType * CanBeNull
 type XrmFormControl = string * XrmFormAttribute option * ControlType * bool * CanBeNull
 type XrmFormTab = string * string * string list
-type XrmFormQuickForm = string * QuickFormReference
+type XrmFormQuickViewForm = string * QuickViewReference
   
 type ControlClassId =
   | CheckBox | DateTime | Decimal | Duration | EmailAddress | EmailBody 
@@ -125,10 +126,8 @@ type XrmForm = {
   name: string
   attributes: XrmFormAttribute list
   controls: XrmFormControl list
-  quickForms: XrmFormQuickForm list
+  quickViewForms: XrmFormQuickViewForm list
   tabs: XrmFormTab list
- 
-  
 }
 
 

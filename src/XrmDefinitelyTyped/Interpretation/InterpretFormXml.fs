@@ -245,9 +245,9 @@ let getCompositeFields : ControlField list -> ControlField list =
     | _ -> None
   ) >> List.concat
 
-let getQuickFormControls : ControlField list -> XrmFormQuickForm list =
-  List.choose (fun (controlId, _, _, _, _, _, quickForms) ->
-    match quickForms with
+let getQuickViewFormControls : ControlField list -> XrmFormQuickViewForm list =
+  List.choose (fun (controlId, _, _, _, _, _, quickViewForms) ->
+    match quickViewForms with
     | Some qf ->
       let qfHead = qf |> List.head
       let qfIds = XElement.Parse qfHead
@@ -320,7 +320,7 @@ let interpretFormXml (enums:Map<string,TsType>) (bpfFields: ControlField list op
           |> Seq.map (fun e -> e.Value)
           |> Seq.toList
 
-      let quickForms =
+      let quickViewForms =
         let parms = c.Descendants(XName.Get("parameters"))
         if Seq.isEmpty parms then None
         else
@@ -342,9 +342,9 @@ let interpretFormXml (enums:Map<string,TsType>) (bpfFields: ControlField list op
       if(targetEntities.Length > 0) then
         let tes =
           Seq.fold(fun acc e -> sprintf "%s | \"%s\"" acc e) (sprintf "\"%s\"" targetEntities.Head) targetEntities.Tail
-        id, datafieldname, controlClass, canBeNull, false, Some tes, quickForms
+        id, datafieldname, controlClass, canBeNull, false, Some tes, quickViewForms
       else
-        id, datafieldname, controlClass, canBeNull, false, None, quickForms
+        id, datafieldname, controlClass, canBeNull, false, None, quickViewForms
     )
     |> List.ofSeq
 
@@ -372,7 +372,7 @@ let interpretFormXml (enums:Map<string,TsType>) (bpfFields: ControlField list op
       |> renameControls
       |> List.sortBy (fun (name, _, _, _,_) -> name)
 
-    quickForms = getQuickFormControls controlFields
+    quickViewForms = getQuickViewFormControls controlFields
 
     tabs = tabs
   }

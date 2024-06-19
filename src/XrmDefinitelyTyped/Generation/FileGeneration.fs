@@ -264,12 +264,11 @@ let generateFormDefs state crmVersion generateMappings =
 
   let formMap =
     state.forms
-    |> Array.map (fun (form: XrmForm) ->
+    |> Array.choose (fun (form: XrmForm) ->
       match form.guid with 
       | Some formId -> Some (formId, form)
       | None -> None
     )
-    |> Array.choose id
     |> Map.ofArray
   
   let defs = 

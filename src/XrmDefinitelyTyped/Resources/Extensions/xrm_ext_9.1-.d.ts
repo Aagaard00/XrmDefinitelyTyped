@@ -234,7 +234,7 @@ declare namespace Xrm {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
-    interface OnLoadEventContext extends ExecutionContext<UiModule<TabCollectionBase, ControlCollectionBase, QuickFormCollectionBase>, LoadEventArgs> {}
+    interface OnLoadEventContext extends ExecutionContext<UiModule<TabCollectionBase, ControlCollectionBase, QuickViewFormCollectionBase>, LoadEventArgs> {}
 
     interface LookupTagValue extends Lookup {
         /**
@@ -295,7 +295,7 @@ declare namespace Xrm {
      * Interface for the ui of a form.
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    interface UiModule<T extends TabCollectionBase, C extends ControlCollectionBase, Q extends QuickFormCollectionBase = QuickFormCollectionBase> {
+    interface UiModule<T extends TabCollectionBase, C extends ControlCollectionBase, Q extends QuickViewFormCollectionBase = QuickViewFormCollectionBase> {
         /**
          * Method to cause the ribbon to re-evaluate data that controls what is displayed in it.
          */
@@ -459,7 +459,7 @@ declare namespace Xrm {
         setVisible(visibility: boolean): void;
     }
     
-    interface QuickForm<T extends TabCollectionBase, C extends ControlCollectionBase> extends PageBase<AttributeCollectionBase, T, C, QuickFormCollectionBase> {
+    interface QuickViewForm<T extends TabCollectionBase, C extends ControlCollectionBase> extends PageBase<AttributeCollectionBase, T, C, QuickViewFormCollectionBase> {
         /**
          * Returns a string value that categorizes quick view controls.
          * For a quick view control, the method returns "quickform".
@@ -756,7 +756,7 @@ declare namespace Xrm {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
-    interface OnRecordSelectEventContext extends ExecutionContext<UiModule<TabCollectionBase, ControlCollectionBase, QuickFormCollectionBase>, undefined> {
+    interface OnRecordSelectEventContext extends ExecutionContext<UiModule<TabCollectionBase, ControlCollectionBase, QuickViewFormCollectionBase>, undefined> {
     }
 
     const enum WebApiOperationType {

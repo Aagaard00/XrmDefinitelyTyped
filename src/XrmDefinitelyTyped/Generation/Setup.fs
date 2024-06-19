@@ -39,7 +39,7 @@ let intersectFormContentByGuid (formDict: IDictionary<Guid, XrmForm>) intersect 
       f.entityDependencies |> Set.ofSeq,  
       f.attributes |> Set.ofList, 
       f.controls |> Set.ofList, 
-      f.quickForms |> Set.ofList,
+      f.quickViewForms |> Set.ofList,
       f.tabs |> Seq.map (fun (name, iname, sections) -> (name, iname), sections |> Set.ofList) |> Map.ofSeq)
 
   intersectContentByGuid "Form" formDict intersect contentMap intersectFormQuads
@@ -72,7 +72,7 @@ let intersectForms formDict formsToIntersect =
       formType = None
       attributes = a |> Set.toList
       controls = c |> Set.toList
-      quickForms = q |> Seq.toList
+      quickViewForms = q |> Seq.toList
       tabs = t |> Map.toList |> List.map (fun ((k1, k2), v) -> k1, k2, v |> Set.toList)
     })
 

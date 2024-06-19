@@ -169,17 +169,17 @@
   interface TabCollectionBase extends CollectionBase<PageTab<SectionCollectionBase>> { } //eslint-disable-line @typescript-eslint/no-empty-interface
 
   /**
-   * A collection of quickforms.
+   * A collection of QuickViewForms.
    */
-  interface QuickFormCollection extends Collection<QuickFormBase> { } //eslint-disable-line @typescript-eslint/no-empty-interface
+  interface QuickViewFormCollection extends Collection<QuickViewFormBase> { } //eslint-disable-line @typescript-eslint/no-empty-interface
 
   /**
-   * A collection of quickforms
+   * A collection of QuickViewForms
   */
-  interface QuickFormCollectionBase extends CollectionBase<QuickFormBase> { } //eslint-disable-line @typescript-eslint/no-empty-interface
+  interface QuickViewFormCollectionBase extends CollectionBase<QuickViewFormBase> { } //eslint-disable-line @typescript-eslint/no-empty-interface
 
-  interface QuickForm<T extends TabCollectionBase, C extends ControlCollectionBase> { } //eslint-disable-line @typescript-eslint/no-empty-interface, @typescript-eslint/no-unused-vars
-  interface QuickFormBase extends QuickForm<TabCollectionBase, ControlCollectionBase> { } //eslint-disable-line @typescript-eslint/no-empty-interface
+  interface QuickViewForm<T extends TabCollectionBase, C extends ControlCollectionBase> { } //eslint-disable-line @typescript-eslint/no-empty-interface, @typescript-eslint/no-unused-vars
+  interface QuickViewFormBase extends QuickViewForm<TabCollectionBase, ControlCollectionBase> { } //eslint-disable-line @typescript-eslint/no-empty-interface
 
   type AttributeType = "boolean" | "datetime" | "decimal" | "double" | "integer" | "lookup" | "memo" | "money" | "optionset" | "string" | "multiselectoptionset";
 
@@ -939,7 +939,7 @@
     /**
      * Returns the Xrm.Page.ui object.
      */
-    getParent(): UiModule<Collection<PageTab<Collection<PageSection>>>, Collection<BaseControl>, Collection<QuickFormBase>>;
+    getParent(): UiModule<Collection<PageTab<Collection<PageSection>>>, Collection<BaseControl>, Collection<QuickViewFormBase>>;
 
     /**
      * Returns the tab label.
@@ -975,7 +975,7 @@
    * Interface for the ui of a form.
    */
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interface UiModule<T extends TabCollectionBase, C extends ControlCollectionBase, Q extends QuickFormCollectionBase = QuickFormCollectionBase> {
+  interface UiModule<T extends TabCollectionBase, C extends ControlCollectionBase, Q extends QuickViewFormCollectionBase = QuickViewFormCollectionBase> {
     /**
      * Collection of tabs on the page.
      */
@@ -1124,7 +1124,7 @@
   /**
    * Interface for the base of an Xrm.Page
    */
-  interface PageBase<A extends AttributeCollectionBase, T extends TabCollectionBase, C extends ControlCollectionBase, Q extends QuickFormCollectionBase = QuickFormCollectionBase> {
+  interface PageBase<A extends AttributeCollectionBase, T extends TabCollectionBase, C extends ControlCollectionBase, Q extends QuickViewFormCollectionBase = QuickViewFormCollectionBase> {
     /**
      * Data on the page.
      */
@@ -1162,7 +1162,7 @@ type BaseXrm = typeof Xrm;
  * Client-side xRM object model.
  */
 //eslint-disable-next-line @typescript-eslint/no-unused-vars
-interface Xrm<T extends Xrm.PageBase<Xrm.AttributeCollectionBase, Xrm.TabCollectionBase, Xrm.ControlCollectionBase, Xrm.QuickFormCollectionBase>> extends BaseXrm {
+interface Xrm<T extends Xrm.PageBase<Xrm.AttributeCollectionBase, Xrm.TabCollectionBase, Xrm.ControlCollectionBase, Xrm.QuickViewFormCollectionBase>> extends BaseXrm {
   /**
    * Various utility functions can be found here.
    */
